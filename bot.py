@@ -2,15 +2,19 @@ import io
 import pyautogui
 import telebot
 
-BOT_TOKEN = "ВАШ_ТОКЕН_БОТА"
-ALLOWED_USER_ID = 123456789  # ваш ID
+BOT_TOKEN = "8191224863:AAHCI6iCZHmEUFJkQYhGA_aaBiaXNbscctI"
+ALLOWED_USERNAME = "Gro0und"  # ваш юзернейм без знака @
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
 
 @bot.message_handler(func=lambda message: True)
 def handle_message(message):
-  if message.from_user.id != ALLOWED_USER_ID:
+  # Проверяем, есть ли у пользователя юзернейм и совпадает ли он с вашим
+  if (
+      message.from_user.username is None
+      or message.from_user.username.lower() != ALLOWED_USERNAME.lower()
+  ):
     return
 
   if message.text and message.text.lower().strip() == "скриншот":
